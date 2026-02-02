@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Avi ❤️ Tanvi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff003c, #ff9aa2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* MAIN CARD */
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 45px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+h1 {
+  color: white;
+  font-size: 2.6rem;
+}
+
+p {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 35px;
+}
+
+.buttons {
+  position: relative;
+  height: 90px;
+}
+
+button {
+  padding: 15px 32px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#yesBtn {
+  background: #ff003c;
+  color: white;
+}
+
+#yesBtn:hover {
+  transform: scale(1.15);
+}
+
+#noBtn {
+  background: white;
+  color: #ff003c;
+  position: absolute;
+}
+
+/* BALLOONS */
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 50px;
+  height: 65px;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 2px;
+  height: 30px;
+  background: white;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-130vh); }
+}
+
+/* HEARTS */
+.heart {
+  position: absolute;
+  color: rgba(255,255,255,0.7);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* LOVE PAGE */
+#lovePage {
+  display: none;
+  text-align: center;
+  color: white;
+  z-index: 3;
+}
+
+#lovePage h1 {
+  font-size: 3rem;
+}
+
+#lovePage p {
+  font-size: 1.4rem;
+  max-width: 500px;
+  margin: auto;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+<!-- HEARTS -->
+<script>
+for (let i = 0; i < 25; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = 16 + Math.random() * 22 + "px";
+  heart.style.animationDuration = 5 + Math.random() * 6 + "s";
+  document.body.appendChild(heart);
+}
+</script>
+
+<!-- BALLOONS -->
+<script>
+const colors = ["#ff003c", "#ff7eb3", "#ffd1dc", "#ff5f7e"];
+for (let i = 0; i < 12; i++) {
+  const b = document.createElement("div");
+  b.className = "balloon";
+  b.style.left = Math.random() * 100 + "vw";
+  b.style.background = colors[Math.floor(Math.random() * colors.length)];
+  b.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(b);
+}
+</script>
+
+<!-- QUESTION PAGE -->
+<div class="container" id="questionPage">
+  <h1>Tanvi 💖</h1>
+  <p>Will you be my Valentine?</p>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No 🙃</button>
+  </div>
+</div>
+
+<!-- LOVE PAGE -->
+<div id="lovePage">
+  <h1>Avi ❤️ Tanvi</h1>
+  <p>
+    From the moment we met, my world felt lighter.<br><br>
+    Thank you for choosing me, for choosing us.<br>
+    Today, tomorrow, always 💕
+  </p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+let scale = 1;
+
+function moveNo() {
+  scale -= 0.08;
+  if (scale < 0.3) scale = 0.3;
+
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.transform = `scale(${scale})`;
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+document.getElementById("yesBtn").onclick = () => {
+  document.getElementById("questionPage").style.display = "none";
+  document.getElementById("lovePage").style.display = "block";
+};
+</script>
+
+</body>
+</html>
